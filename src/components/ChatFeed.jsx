@@ -13,7 +13,7 @@ const ChatFeed = (props) => {
             className="read-receipt"
             style={{
                 float: isMyMessage ? 'right' : 'left',
-                backgroundImage: person.person.avatar && `url(${person.person.avatar})`
+                backgroundImage: person.person.avatar && `url(${person.person.avatar})`,
             }}
         />
     ));
@@ -24,15 +24,14 @@ const ChatFeed = (props) => {
         return keys.map((key, index) => {
             const message = messages[key];
             const lastMessageKey = index === 0 ? null : keys[index - 1];
-            const isMyMessage = userName === message.sender.userName;
+            const isMyMessage = userName === message.sender.username;
 
             return (
                 <div key={`msg_${index}`} style={{ width: '100%' }}>
                     <div className="message-block">
                         {isMyMessage
                             ? <MyMessage message={message}/>
-                            : <TheirMessage message={message} lastMessage={messages[lastMessageKey]}/>
-                        }
+                            : <TheirMessage message={message} lastMessage={messages[lastMessageKey]}/>}
                     </div>
                     <div className="read-receipts" style={{ marginRight: isMyMessage ? '18px' : '0px', marginLeft: isMyMessage ? '0px' : '68px' }}>
                         {renderReadReceipts(message, isMyMessage)}
